@@ -19,7 +19,8 @@ class _ItemDetailScreenState extends State<ItemDetailScreen> {
     return Scaffold(
       backgroundColor: white,
       floatingActionButton: Container(
-        height: getHeight(context) * 0.1,
+        padding: EdgeInsets.symmetric(vertical: 15.h, horizontal: 15.w),
+        height: getHeight(context) * 0.12,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -27,23 +28,48 @@ class _ItemDetailScreenState extends State<ItemDetailScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text('Total Price'),
-                Text('\$${widget.item!.amount}')
+                Text('Total Price',
+                    style: TextStyle(
+                        fontSize: 14.sp,
+                        color: Colors.grey[600],
+                        fontWeight: FontWeight.w600)),
+                SizedBox(height: 5.h),
+                Text('\$${widget.item!.amount}',
+                    style: TextStyle(
+                        fontSize: 20.sp,
+                        color: primaryGreen,
+                        fontWeight: FontWeight.w700))
               ],
             ),
             const Expanded(child: SizedBox()),
             Container(
-              decoration: BoxDecoration(color: primaryGreen),
+              padding: const EdgeInsets.all(17),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(5.r),
+                    bottomLeft: Radius.circular(5.r)),
+                color: primaryGreen,
+              ),
               child: Row(
-                children: const [
-                  Icon(Icons.shopping_bag_outlined, color: white),
-                  Text('1', style: TextStyle(color: white)),
+                children: [
+                  const Icon(Icons.shopping_bag_outlined, color: white),
+                  SizedBox(width: 10.w),
+                  const Text('1',
+                      style:
+                          TextStyle(color: white, fontWeight: FontWeight.bold)),
                 ],
               ),
             ),
             Container(
-              decoration: BoxDecoration(color: Colors.blueGrey[900]),
-              child: const Text('Buy Now', style: TextStyle(color: white)),
+              padding: const EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                color: Colors.blueGrey[900],
+                borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(5.r),
+                    bottomRight: Radius.circular(5.r)),
+              ),
+              child: const Text('Buy Now',
+                  style: TextStyle(color: white, fontWeight: FontWeight.bold)),
             )
           ],
         ),
@@ -64,50 +90,57 @@ class _ItemDetailScreenState extends State<ItemDetailScreen> {
           ),
         ),
         actions: [
-          const Icon(Icons.favorite_outline, color: black),
+          Icon(
+            widget.item!.isLiked!
+                ? Icons.favorite
+                : Icons.favorite_border_outlined,
+            color: widget.item!.isLiked! ? Colors.pink[300] : Colors.black,
+          ),
           const SizedBox(width: 15),
           const Icon(Icons.share_outlined, color: black),
           const SizedBox(width: 15),
           Padding(
             padding: const EdgeInsets.only(top: 10.0),
             child: Stack(children: [
-              const Icon(Icons.shopping_bag_outlined, size: 30, color: black),
+              Icon(
+                Icons.shopping_bag_outlined,
+                size: 30.sp,
+                color: black,
+              ),
               Padding(
-                  padding: EdgeInsets.only(top: 0.h, left: 10.0.w),
+                  padding: EdgeInsets.only(top: 0.h, left: 15.0.w, right: 5.w),
                   child: Container(
-                    padding: EdgeInsets.all(3.r),
-                    decoration: const BoxDecoration(
-                        color: Colors.pink, shape: BoxShape.rectangle),
-                    child: FittedBox(
-                        child: Text('1',
-                            style: TextStyle(
-                                color: white,
-                                fontSize: 10.sp,
-                                fontWeight: FontWeight.bold))),
-                  )),
+                    padding:
+                        EdgeInsets.symmetric(vertical: 2.h, horizontal: 5.w),
+                    decoration: BoxDecoration(
+                        color: Colors.pink[300],
+                        borderRadius: BorderRadius.circular(3.r)),
+                    child: Text(' 1 ',
+                        style: TextStyle(
+                            color: white,
+                            fontSize: 10.sp,
+                            fontWeight: FontWeight.bold)),
+                  ))
             ]),
           ),
           const SizedBox(width: 15),
         ],
       ),
-      body: Padding(
-        padding: EdgeInsets.symmetric(vertical: 8.0.h, horizontal: 20.w),
-        child: ListView(children: [
-          Container(
+      body: ListView(children: [
+        Padding(
+          padding: EdgeInsets.symmetric(vertical: 8.0.h, horizontal: 20.w),
+          child: Container(
+              padding: const EdgeInsets.all(10),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  MenuItem(icon: Icons.woman, color: Colors.blueGrey[100]),
+                  MenuItem(icon: Icons.man, color: Colors.blueGrey[100]),
                   MenuItem(
-                      icon: Icons.category_outlined,
-                      color: Colors.blueGrey[400]),
+                      icon: Icons.collections, color: Colors.blueGrey[100]),
                   MenuItem(
-                      icon: Icons.flight_outlined, color: Colors.blueGrey[400]),
-                  MenuItem(
-                      icon: Icons.payment_outlined,
-                      color: Colors.blueGrey[400]),
-                  MenuItem(
-                      icon: Icons.adjust_outlined, color: Colors.blueGrey[400]),
+                      icon: Icons.adjust_outlined, color: Colors.blueGrey[100]),
                 ],
               ),
               // padding: const EdgeInsets.all(30),
@@ -115,61 +148,153 @@ class _ItemDetailScreenState extends State<ItemDetailScreen> {
               width: getWeight(context),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20.r),
-                  color: Colors.grey.withOpacity(0.1),
+                  color: Colors.grey.withOpacity(0.2),
                   image: DecorationImage(
                       image: AssetImage('assets/images/${widget.item!.image!}'),
                       fit: BoxFit.contain))),
-          SizedBox(height: 20.h),
-          Row(children: const [
-            Icon(Icons.shop_sharp),
-            Text('tokobaju.id'),
+        ),
+        SizedBox(height: 20.h),
+        Padding(
+          padding: EdgeInsets.symmetric(vertical: 8.0.h, horizontal: 20.w),
+          child: Row(children: [
+            const Icon(
+              Icons.store,
+              color: Colors.grey,
+              size: 30,
+            ),
+            Text('  tokobaju.id',
+                style: TextStyle(
+                    fontSize: 14.sp,
+                    color: Colors.grey,
+                    fontWeight: FontWeight.w500)),
           ]),
-          SizedBox(height: 20.h),
-          Text(widget.item!.body!),
-          Row(children: [
-            Icon(Icons.star, color: Colors.yellow[900]),
-            Text('${widget.item!.rating!} Ratings '),
-            const Text('.'),
-            const Text('2.3+ Reviews '),
-            const Text('.'),
-            const Text('2.9 + Sold '),
+        ),
+        SizedBox(height: 10.h),
+        Padding(
+          padding: EdgeInsets.symmetric(vertical: 8.0.h, horizontal: 20.w),
+          child: Padding(
+            padding: const EdgeInsets.only(right: 20.0),
+            child: Text(widget.item!.body!,
+                style: TextStyle(
+                    height: 1.5,
+                    fontSize: 16.sp,
+                    color: black,
+                    fontWeight: FontWeight.bold)),
+          ),
+        ),
+        SizedBox(height: 20.h),
+        Padding(
+          padding: EdgeInsets.symmetric(vertical: 8.0.h, horizontal: 20.w),
+          child: Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
+            Icon(
+              Icons.star,
+              color: Colors.yellow[900],
+              size: 20,
+            ),
+            Text(' ${widget.item!.rating!} Ratings ',
+                style: TextStyle(
+                    fontSize: 14.sp,
+                    color: Colors.grey,
+                    fontWeight: FontWeight.w500)),
+            Text(' . ',
+                style: TextStyle(
+                    fontSize: 14.sp,
+                    color: Colors.grey,
+                    fontWeight: FontWeight.w500)),
+            Text('2.3+ Reviews ',
+                style: TextStyle(
+                    fontSize: 14.sp,
+                    color: Colors.grey,
+                    fontWeight: FontWeight.w500)),
+            Text(' . ',
+                style: TextStyle(
+                    fontSize: 14.sp,
+                    color: Colors.grey,
+                    fontWeight: FontWeight.w500)),
+            Text('2.9 + Sold ',
+                style: TextStyle(
+                    fontSize: 14.sp,
+                    color: Colors.grey,
+                    fontWeight: FontWeight.w500)),
           ]),
-          SizedBox(height: 10.h),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            // crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Column(
-                children: [
-                  const Text('About item'),
-                  SizedBox(
-                    height: 2.h,
-                  ),
-                ],
-              ),
-              Column(
-                children: const [
-                  Text('Reviews'),
-                ],
-              ),
-            ],
-          ),
-          Row(
-            children: const [
-              Divider(),
-            ],
-          ),
-          Row(
-            children: const [
-              Text('Brand: '),
-              Text('ChArmkpR '),
-              Expanded(child: SizedBox()),
-              Text('Color: '),
-              Text('Aprikot ')
-            ],
-          ),
-        ]),
-      ),
+        ),
+        SizedBox(height: 20.h),
+        Padding(
+          padding: const EdgeInsets.only(left: 20.0),
+          child: DefaultTabController(
+              length: 2, // length of tabs
+              initialIndex: 0,
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: <Widget>[
+                    SizedBox(
+                      child: TabBar(
+                        labelColor: primaryGreen,
+                        unselectedLabelColor: Colors.grey,
+                        labelPadding: const EdgeInsets.only(left: 0),
+                        indicatorWeight: 3,
+                        indicatorColor: primaryGreen,
+                        labelStyle:
+                            const TextStyle(fontWeight: FontWeight.w500),
+                        tabs: const [
+                          Tab(text: 'About Item'),
+                          Tab(text: 'Reviews'),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      height: getHeight(context), //height of TabBarView
+                      decoration: const BoxDecoration(
+                          border: Border(
+                              top: BorderSide(color: Colors.grey, width: 0.5))),
+                      child: TabBarView(children: <Widget>[
+                        _aboutItem(),
+                        const Center(
+                          child: Text('Display Tab 2',
+                              style: TextStyle(
+                                  fontSize: 22, fontWeight: FontWeight.bold)),
+                        ),
+                      ]),
+                    )
+                  ])),
+        ),
+        SizedBox(height: 100.h)
+      ]),
+    );
+  }
+
+  _aboutItem() {
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 8.0.h, horizontal: 5.w),
+      child: Column(children: [
+        SizedBox(height: 15.h),
+        Row(
+          children: [
+            Text('Brand: ',
+                style: TextStyle(
+                    fontSize: 14.sp,
+                    color: Colors.grey[600],
+                    fontWeight: FontWeight.w500)),
+            Text('  ChArmkpR ',
+                style: TextStyle(
+                    fontSize: 14.sp,
+                    color: black,
+                    fontWeight: FontWeight.bold)),
+            const Expanded(child: SizedBox()),
+            Text('Color: ',
+                style: TextStyle(
+                    fontSize: 14.sp,
+                    color: Colors.grey[600],
+                    fontWeight: FontWeight.w500)),
+            Text(
+              'Aprikot ',
+              style: TextStyle(
+                  fontSize: 14.sp, color: black, fontWeight: FontWeight.bold),
+            ),
+            SizedBox(width: 10.w)
+          ],
+        ),
+      ]),
     );
   }
 }

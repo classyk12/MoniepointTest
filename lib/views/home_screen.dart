@@ -43,7 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
             title: Padding(
               padding: EdgeInsets.only(left: 00.w, top: 5.h),
               child: searchInput(
-                  width: getWeight(context) * 0.30,
+                  width: getWeight(context) * 0.29,
                   autoFocus: false,
                   controller: textEditingController,
                   context: context),
@@ -65,7 +65,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         decoration: BoxDecoration(
                             color: Colors.pink[300],
                             borderRadius: BorderRadius.circular(3.r)),
-                        child: Text('1',
+                        child: Text(' 1 ',
                             style: TextStyle(
                                 color: white,
                                 fontSize: 10.sp,
@@ -301,7 +301,7 @@ class _HomeScreenState extends State<HomeScreen> {
               height: 50,
               width: 130,
               fontSize: 12.sp,
-              color: black,
+              color: Colors.blueGrey[900],
               textColor: white,
             ),
           ],
@@ -350,7 +350,7 @@ class _HomeScreenState extends State<HomeScreen> {
               height: 50,
               width: 130,
               fontSize: 12.sp,
-              color: black,
+              color: Colors.blueGrey[900],
               textColor: white,
             ),
           ],

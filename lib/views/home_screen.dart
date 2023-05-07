@@ -20,6 +20,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   TextEditingController? textEditingController = TextEditingController();
+  ScrollController? scrollController;
   List<Item> items = <Item>[];
   final PageController? pageController =
       PageController(viewportFraction: 1, initialPage: 0);
@@ -29,6 +30,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     items = getItems();
+    scrollController = ScrollController();
+    scrollController!.addListener(_scrollListener);
     super.initState();
   }
 
@@ -37,8 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: PreferredSize(
           child: AppBar(
-            backgroundColor:
-                page == 1 ? const Color(0xffdab6c8) : const Color(0xffeae9ee),
+            backgroundColor: _getBgColor(),
             elevation: 0,
             title: Padding(
               padding: EdgeInsets.only(left: 00.w, top: 5.h),
@@ -101,15 +103,92 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           preferredSize: Size.fromHeight(70.h)),
       backgroundColor: Colors.white,
-      body: ListView(
+      body:
+
+          // CustomScrollView(
+          //   controller: scrollController,
+          //   slivers: <Widget>[
+          //     SliverAppBar(
+          //       backgroundColor: Colors.white,
+          //       elevation: 0,
+          //       // bottom: ,
+          //       pinned: true,
+          //       expandedHeight: getHeight(context) * 0.25,
+          //       flexibleSpace: FlexibleSpaceBar(
+          //         title: Padding(
+          //           padding: EdgeInsets.symmetric(horizontal: 15.0.w),
+          //           child: Row(
+          //               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //               children: [
+          //                 Text(
+          //                   'Best Sale Product',
+          //                   style: TextStyle(
+          //                       color: black,
+          //                       fontWeight: FontWeight.bold,
+          //                       fontSize: 14.sp),
+          //                 ),
+          //                 Text('See more',
+          //                     style: TextStyle(
+          //                         color: primaryGreen,
+          //                         fontWeight: FontWeight.w500,
+          //                         fontSize: 12.sp))
+          //               ]),
+          //         ),
+          //         // Text('Goa', textScaleFactor: 1),
+          //         background: SizedBox(
+          //           width: getWeight(context),
+          //           height: getHeight(context) * 0.25,
+          //           child: PageView(
+          //             allowImplicitScrolling: false,
+          //             controller: pageController,
+          //             onPageChanged: (int currentpage) {
+          //               debugPrint('xxxx => ' + currentpage.toString());
+          //               if (currentpage == 3) {
+          //                 return;
+          //               }
+
+          //               setState(() {
+          //                 page = currentpage;
+          //               });
+          //             },
+          //             children: <Widget>[_ad1(), _ad2()],
+          //           ),
+          //         ),
+          //       ),
+          //     ),
+          //     //3
+          //     SliverList(
+          //       delegate: SliverChildBuilderDelegate(
+          //         (_, int index) {
+          //           return ListTile(
+          //             leading: Container(
+          //                 padding: EdgeInsets.all(8),
+          //                 width: 100,
+          //                 child: Placeholder()),
+          //             title: Text('Place ${index + 1}', textScaleFactor: 2),
+          //           );
+          //         },
+          //         childCount: 20,
+          //       ),
+          //     ),
+          //   ],
+          // ),
+
+          ListView(
+        controller: scrollController,
         children: [
           SizedBox(
             width: getWeight(context),
             height: getHeight(context) * 0.25,
             child: PageView(
-              allowImplicitScrolling: true,
+              allowImplicitScrolling: false,
               controller: pageController,
               onPageChanged: (int currentpage) {
+                debugPrint('xxxx => ' + currentpage.toString());
+                if (currentpage == 3) {
+                  return;
+                }
+
                 setState(() {
                   page = currentpage;
                 });
@@ -357,5 +436,26 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
     );
+  }
+
+  _getBgColor() {
+    debugPrint(page.toString());
+
+    if (page == 1) {
+      return const Color(0xffdab6c8);
+    } else if (page == 0) {
+      return const Color(0xffeae9ee);
+    } else {
+      return Colors.white;
+    }
+  }
+
+  _scrollListener() {
+    if (scrollController!.position.axisDirection == AxisDirection.up ||
+        scrollController!.position.axisDirection == AxisDirection.down) {
+      setState(() {
+        page = 3;
+      });
+    }
   }
 }

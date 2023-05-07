@@ -103,232 +103,181 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           preferredSize: Size.fromHeight(70.h)),
       backgroundColor: Colors.white,
-      body:
+      body: CustomScrollView(controller: scrollController, slivers: <Widget>[
+        SliverAppBar(
+          titleTextStyle: TextStyle(
+              color: black, fontWeight: FontWeight.bold, fontSize: 15.sp),
+          centerTitle: false,
+          backgroundColor: Colors.white,
+          elevation: 0,
+          pinned: true,
+          expandedHeight: getHeight(context) * 0.55,
+          flexibleSpace: FlexibleSpaceBar(
+            expandedTitleScale: 1,
+            centerTitle: true,
+            title: Padding(
+              padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 15.w),
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Best Sale Product',
+                      style: TextStyle(
+                          color: black,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14.sp),
+                    ),
+                    Text('See more',
+                        style: TextStyle(
+                            color: primaryGreen,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 14.sp))
+                  ]),
+            ),
+            background: Container(
+              color: Colors.white,
+              height: getHeight(context) * 0.4,
+              child: Column(children: [
+                SizedBox(
+                  width: getWeight(context),
+                  height: getHeight(context) * 0.3,
+                  child: PageView(
+                    allowImplicitScrolling: false,
+                    controller: pageController,
+                    onPageChanged: (int currentpage) {
+                      if (currentpage == 3) {
+                        return;
+                      }
 
-          // CustomScrollView(
-          //   controller: scrollController,
-          //   slivers: <Widget>[
-          //     SliverAppBar(
-          //       backgroundColor: Colors.white,
-          //       elevation: 0,
-          //       // bottom: ,
-          //       pinned: true,
-          //       expandedHeight: getHeight(context) * 0.25,
-          //       flexibleSpace: FlexibleSpaceBar(
-          //         title: Padding(
-          //           padding: EdgeInsets.symmetric(horizontal: 15.0.w),
-          //           child: Row(
-          //               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          //               children: [
-          //                 Text(
-          //                   'Best Sale Product',
-          //                   style: TextStyle(
-          //                       color: black,
-          //                       fontWeight: FontWeight.bold,
-          //                       fontSize: 14.sp),
-          //                 ),
-          //                 Text('See more',
-          //                     style: TextStyle(
-          //                         color: primaryGreen,
-          //                         fontWeight: FontWeight.w500,
-          //                         fontSize: 12.sp))
-          //               ]),
-          //         ),
-          //         // Text('Goa', textScaleFactor: 1),
-          //         background: SizedBox(
-          //           width: getWeight(context),
-          //           height: getHeight(context) * 0.25,
-          //           child: PageView(
-          //             allowImplicitScrolling: false,
-          //             controller: pageController,
-          //             onPageChanged: (int currentpage) {
-          //               debugPrint('xxxx => ' + currentpage.toString());
-          //               if (currentpage == 3) {
-          //                 return;
-          //               }
-
-          //               setState(() {
-          //                 page = currentpage;
-          //               });
-          //             },
-          //             children: <Widget>[_ad1(), _ad2()],
-          //           ),
-          //         ),
-          //       ),
-          //     ),
-          //     //3
-          //     SliverList(
-          //       delegate: SliverChildBuilderDelegate(
-          //         (_, int index) {
-          //           return ListTile(
-          //             leading: Container(
-          //                 padding: EdgeInsets.all(8),
-          //                 width: 100,
-          //                 child: Placeholder()),
-          //             title: Text('Place ${index + 1}', textScaleFactor: 2),
-          //           );
-          //         },
-          //         childCount: 20,
-          //       ),
-          //     ),
-          //   ],
-          // ),
-
-          ListView(
-        controller: scrollController,
-        children: [
-          SizedBox(
-            width: getWeight(context),
-            height: getHeight(context) * 0.25,
-            child: PageView(
-              allowImplicitScrolling: false,
-              controller: pageController,
-              onPageChanged: (int currentpage) {
-                if (currentpage == 3) {
-                  return;
-                }
-                setState(() {
-                  page = currentpage;
-                });
-              },
-              children: <Widget>[_ad1(), _ad2()],
+                      setState(() {
+                        page = currentpage;
+                      });
+                    },
+                    children: <Widget>[_ad1(), _ad2()],
+                  ),
+                ),
+                SizedBox(height: 15.h),
+                Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: const [
+                      MenuItem(
+                          icon: Icons.category_outlined, title: 'Category'),
+                      MenuItem(icon: Icons.flight_outlined, title: 'Flight'),
+                      MenuItem(icon: Icons.payment_outlined, title: 'Bill'),
+                      MenuItem(icon: Icons.adjust_outlined, title: 'Data Plan'),
+                      MenuItem(
+                          icon: Icons.currency_pound_sharp, title: 'Top up'),
+                    ]),
+                SizedBox(height: 20.h),
+                Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                  indicator(true),
+                  indicator(false),
+                  indicator(false),
+                ]),
+                SizedBox(height: 30.h),
+              ]),
             ),
           ),
-          SizedBox(height: 15.h),
-          Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: const [
-                MenuItem(icon: Icons.category_outlined, title: 'Category'),
-                MenuItem(icon: Icons.flight_outlined, title: 'Flight'),
-                MenuItem(icon: Icons.payment_outlined, title: 'Bill'),
-                MenuItem(icon: Icons.adjust_outlined, title: 'Data Plan'),
-                MenuItem(icon: Icons.currency_pound_sharp, title: 'Top up'),
-              ]),
-          SizedBox(height: 20.h),
-          Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-            indicator(true),
-            indicator(false),
-            indicator(false),
-          ]),
-          SizedBox(height: 30.h),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 15.0.w),
-            child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Best Sale Product',
-                    style: TextStyle(
-                        color: black,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16.sp),
-                  ),
-                  Text('See more',
-                      style: TextStyle(
-                          color: primaryGreen,
-                          fontWeight: FontWeight.w500,
-                          fontSize: 14.sp))
-                ]),
-          ),
-          const SizedBox(height: 20),
-          GridView.builder(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: items.length,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 10.0,
-                  childAspectRatio: 0.7,
-                  mainAxisSpacing: 20.0),
-              itemBuilder: (BuildContext ctx, int index) {
-                var item = items[index];
-
-                return InkWell(
-                  onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => ItemDetailScreen(item: item))),
-                  child: Container(
-                    height: 120.h,
-                    color: white,
-                    child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                              child: Padding(
-                                padding:
-                                    const EdgeInsets.only(top: 8.0, right: 5),
-                                child: Align(
-                                  alignment: Alignment.topRight,
-                                  child: Icon(
-                                    item.isLiked!
-                                        ? Icons.favorite
-                                        : Icons.favorite_border_outlined,
-                                    color: item.isLiked!
-                                        ? Colors.pink[300]
-                                        : Colors.black,
-                                  ),
+        ),
+        //3
+        SliverGrid(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              crossAxisSpacing: 10.0,
+              childAspectRatio: 0.7,
+              mainAxisSpacing: 20.0),
+          delegate: SliverChildBuilderDelegate(
+            (BuildContext context, int index) {
+              var item = items[index];
+              return InkWell(
+                onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ItemDetailScreen(item: item))),
+                child: Container(
+                  height: 120.h,
+                  color: white,
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.only(top: 8.0, right: 5),
+                              child: Align(
+                                alignment: Alignment.topRight,
+                                child: Icon(
+                                  item.isLiked!
+                                      ? Icons.favorite
+                                      : Icons.favorite_border_outlined,
+                                  color: item.isLiked!
+                                      ? Colors.pink[300]
+                                      : Colors.black,
                                 ),
                               ),
-                              height: 110.h,
-                              width: getWeight(context),
-                              decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                      image: AssetImage(
-                                          'assets/images/${item.image!}'),
-                                      fit: BoxFit.cover))),
-                          SizedBox(height: 11.h),
-                          Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 8.0.w),
-                            child: SizedBox(
-                              child: Text(item.title ?? '',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      fontSize: 12.sp,
-                                      color: Colors.grey,
-                                      fontWeight: FontWeight.w500)),
                             ),
-                          ),
-                          SizedBox(height: 6.h),
-                          Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 8.0.w),
-                            child: Text(item.body ?? '',
-                                maxLines: 2,
+                            height: 110.h,
+                            width: getWeight(context),
+                            decoration: BoxDecoration(
+                                image: DecorationImage(
+                                    image: AssetImage(
+                                        'assets/images/${item.image!}'),
+                                    fit: BoxFit.cover))),
+                        SizedBox(height: 11.h),
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 8.0.w),
+                          child: SizedBox(
+                            child: Text(item.title ?? '',
+                                textAlign: TextAlign.center,
                                 style: TextStyle(
-                                    overflow: TextOverflow.ellipsis,
                                     fontSize: 12.sp,
-                                    color: black,
-                                    fontWeight: FontWeight.bold)),
+                                    color: Colors.grey,
+                                    fontWeight: FontWeight.w500)),
                           ),
-                          SizedBox(height: 10.h),
-                          Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 8.0.w),
-                            child: Row(children: [
-                              Icon(
-                                Icons.star,
-                                color: Colors.yellow[900],
-                                size: 15,
-                              ),
-                              Text('${item.rating} | ${item.totalReviews}',
-                                  style: TextStyle(
-                                      fontSize: 12.sp,
-                                      color: Colors.grey,
-                                      fontWeight: FontWeight.w500)),
-                              const Expanded(child: SizedBox()),
-                              Text('\$${item.amount}',
-                                  style: TextStyle(
-                                      fontSize: 16.sp,
-                                      color: primaryGreen,
-                                      fontWeight: FontWeight.w700))
-                            ]),
-                          )
-                        ]),
-                  ),
-                );
-              }),
-        ],
-      ),
+                        ),
+                        SizedBox(height: 6.h),
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 8.0.w),
+                          child: Text(item.body ?? '',
+                              maxLines: 2,
+                              style: TextStyle(
+                                  overflow: TextOverflow.ellipsis,
+                                  fontSize: 12.sp,
+                                  color: black,
+                                  fontWeight: FontWeight.bold)),
+                        ),
+                        SizedBox(height: 10.h),
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 8.0.w),
+                          child: Row(children: [
+                            Icon(
+                              Icons.star,
+                              color: Colors.yellow[900],
+                              size: 15,
+                            ),
+                            Text('${item.rating} | ${item.totalReviews}',
+                                style: TextStyle(
+                                    fontSize: 12.sp,
+                                    color: Colors.grey,
+                                    fontWeight: FontWeight.w500)),
+                            const Expanded(child: SizedBox()),
+                            Text('\$${item.amount}',
+                                style: TextStyle(
+                                    fontSize: 16.sp,
+                                    color: primaryGreen,
+                                    fontWeight: FontWeight.w700))
+                          ]),
+                        )
+                      ]),
+                ),
+              );
+            },
+            childCount: items.length,
+          ),
+        )
+      ]),
     );
   }
 

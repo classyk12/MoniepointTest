@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'MARKET PLACE',
         home: const SplashScreen(),
-        theme: ThemeData(fontFamily: 'Montserrat'),
+        theme: ThemeData(fontFamily: 'Jost'),
         builder: (context, widget) {
           ScreenUtil.init(context);
           return MediaQuery(

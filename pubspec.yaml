@@ -96,6 +96,10 @@ flutter:
         - asset: assets/fonts/Montserrat-Thin.ttf
         - asset: assets/fonts/Montserrat-ThinItalic.ttf
 
+    - family:  MyFlutterApp
+      fonts:
+       - asset: assets/fonts/MyFlutterApp.ttf
+
   # fonts:
   #   - family: Schyler
   #     fonts:

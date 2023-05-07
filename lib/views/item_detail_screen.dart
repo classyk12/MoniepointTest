@@ -15,6 +15,8 @@ class ItemDetailScreen extends StatefulWidget {
 }
 
 class _ItemDetailScreenState extends State<ItemDetailScreen> {
+  static const _kFontFam = 'MyFlutterApp';
+  static const String? _kFontPkg = null;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -160,7 +162,7 @@ class _ItemDetailScreenState extends State<ItemDetailScreen> {
         ),
         SizedBox(height: 20.h),
         DelayedAnimation(
-          delay: 900,
+          delay: 850,
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 20.w),
             child: Row(children: [
@@ -194,7 +196,7 @@ class _ItemDetailScreenState extends State<ItemDetailScreen> {
         ),
         SizedBox(height: 10.h),
         DelayedAnimation(
-          delay: 900,
+          delay: 850,
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 20.w),
             child:
@@ -209,21 +211,23 @@ class _ItemDetailScreenState extends State<ItemDetailScreen> {
                       fontSize: 14.sp,
                       color: Colors.grey,
                       fontWeight: FontWeight.w500)),
-              Text(' . ',
-                  style: TextStyle(
-                      fontSize: 14.sp,
-                      color: Colors.grey,
-                      fontWeight: FontWeight.w500)),
+              const Icon(
+                IconData(
+                  0xe801,
+                  fontFamily: _kFontFam,
+                  fontPackage: _kFontPkg,
+                ),
+                color: Colors.grey,
+              ),
               Text('2.3+ Reviews ',
                   style: TextStyle(
                       fontSize: 14.sp,
                       color: Colors.grey,
                       fontWeight: FontWeight.w500)),
-              Text(' . ',
-                  style: TextStyle(
-                      fontSize: 14.sp,
-                      color: Colors.grey,
-                      fontWeight: FontWeight.w500)),
+              const Icon(
+                IconData(0xe801, fontFamily: _kFontFam, fontPackage: _kFontPkg),
+                color: Colors.grey,
+              ),
               Text('2.9 + Sold ',
                   style: TextStyle(
                       fontSize: 14.sp,
@@ -234,7 +238,7 @@ class _ItemDetailScreenState extends State<ItemDetailScreen> {
         ),
         SizedBox(height: 15.h),
         DelayedAnimation(
-          delay: 900,
+          delay: 850,
           child: Padding(
             padding: const EdgeInsets.only(left: 20.0),
             child: DefaultTabController(

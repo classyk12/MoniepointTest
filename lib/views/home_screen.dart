@@ -184,11 +184,9 @@ class _HomeScreenState extends State<HomeScreen> {
               allowImplicitScrolling: false,
               controller: pageController,
               onPageChanged: (int currentpage) {
-                debugPrint('xxxx => ' + currentpage.toString());
                 if (currentpage == 3) {
                   return;
                 }
-
                 setState(() {
                   page = currentpage;
                 });
@@ -439,8 +437,6 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   _getBgColor() {
-    debugPrint(page.toString());
-
     if (page == 1) {
       return const Color(0xffdab6c8);
     } else if (page == 0) {
